@@ -14,12 +14,12 @@ import gdown
 # Download model from Google Drive if not exists
 # ----------------------------
 model_path = "fake_news_lstm.h5"
-file_id = "1_d0vt4JLwCwGgV0BZOeWLRmJIUhMk6Iz"  # your Google Drive file ID
+file_id = "1_d0vt4JLwCwGgV0BZOeWLRmJIUhMk6Iz"  # Google Drive file ID
 if not os.path.exists(model_path):
     url = f"https://drive.google.com/uc?id={file_id}"
     gdown.download(url, model_path, quiet=False)
 
-# Load LSTM model and compile to avoid NoneType error
+# Load LSTM model and compile
 model = load_model(model_path)
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
@@ -27,7 +27,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 with open("tokenizer.pkl", "rb") as f:
     tokenizer = pickle.load(f)
 
-# Define stopwords using sklearn
+# Define stopwords
 stop_words = set(ENGLISH_STOP_WORDS)
 
 # Preprocessing function
